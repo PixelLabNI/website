@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Lab NI — Desenvolvimento Web</title>
+  <meta name="description" content="Desenvolvemos websites modernos, rápidos e personalizados para sua presença digital. Crie seu site profissional ou loja virtual.">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  </head>
+
+<body class="dark">
+    <header class="navbar">
+    <div class="logo">Pixel <span>Lab NI</span></div>
+
+    <nav class="nav-menu">
+        <ul>
+        <li><a href="#services">Serviços</a></li>
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="#contact">Contato</a></li>
+        <li><a href="login.html" class="btn-login">Login</a></li>
+        </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Abrir menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    </header>
+
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Crie sua presença digital com a <span>Pixel Lab NI</span></h1>
+      <p>Desenvolvemos websites modernos, rápidos e personalizados para o seu negócio.</p>
+      <a href="#contact" class="btn-primary">Solicite um orçamento</a>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <h2>Nossos Serviços</h2>
+    <p class="section-subtitle">Soluções completas para o seu site</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Sites Profissionais</h3>
+        <p>Criação de websites únicos, otimizados e com design responsivo.</p>
+      </div>
+      <div class="card">
+        <h3>Lojas Virtuais</h3>
+        <p>Plataformas de e-commerce seguras e fáceis de gerenciar.</p>
+      </div>
+      <div class="card">
+        <h3>Manutenção & SEO</h3>
+        <p>Melhoria contínua e otimização para buscadores.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>Sobre Nós</h2>
+    <div class="about-container">
+      <p>A <strong>Pixel Lab NI</strong> é especializada em criar experiências digitais memoráveis.  
+      Nosso foco é unir design, tecnologia e performance para transformar ideias em resultados reais.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Entre em Contato</h2>
+    <p class="section-subtitle">Fale conosco e receba um orçamento personalizado</p>
+
+    <form id="contactForm" class="form">
+      <input type="text" id="name" name="name" placeholder="Seu nome" required>
+      <input type="email" id="email" name="email" placeholder="Seu email" required>
+      <textarea id="message" name="message" placeholder="Mensagem" required></textarea>
+      <button type="submit" class="btn-primary">Enviar Mensagem</button>
+      <div id="contact-status" class="status"></div>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Pixel Lab NI — Todos os direitos reservados</p>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
