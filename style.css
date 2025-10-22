@@ -15,10 +15,16 @@
   --color-text-dark: #9ca3af; /* Texto cinza/subtítulo */
 }
 
-* {
+/* ⬅️ Aprimoramento: Reset de Box-sizing mais robusto */
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth; /* APRIMORAMENTO UX: Scroll Suave */
+}
+
+*, *::before, *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 body.dark {
@@ -28,6 +34,12 @@ body.dark {
   line-height: 1.7;
 }
 
+/* APRIMORAMENTO UX: Bloqueio de scroll quando o menu está aberto */
+body.no-scroll {
+  overflow: hidden;
+}
+
+
 a {
   color: inherit;
   text-decoration: none;
@@ -35,7 +47,7 @@ a {
 
 section {
   padding: 6rem 2rem;
-  transition: all 0.3s ease;
+  /* ⬅️ Removida transição 'all' desnecessária daqui */
 }
 
 /* ===== Navbar ===== */
@@ -81,7 +93,9 @@ section {
   font-weight: 400;
 }
 
-.nav-menu a:hover {
+/* ⬅️ Aprimoramento: Adicionado :focus-visible para acessibilidade */
+.nav-menu a:hover,
+.nav-menu a:focus-visible {
   color: var(--color-primary-light);
 }
 
@@ -89,10 +103,13 @@ section {
   border: 1px solid var(--color-primary);
   padding: 0.5rem 1.2rem;
   border-radius: 6px;
-  transition: all 0.3s ease;
+  /* ⬅️ Aprimoramento: Transição específica */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-login:hover {
+/* ⬅️ Aprimoramento: Adicionado :focus-visible para acessibilidade */
+.btn-login:hover,
+.btn-login:focus-visible {
   background: var(--color-primary);
   color: white;
 }
@@ -118,8 +135,13 @@ section {
   transition: all 0.3s ease;
 }
 
-/* ===== Responsividade Navbar (Mantido) ===== */
+/* ===== Responsividade Navbar (Refinada) ===== */
 @media (max-width: 768px) {
+  /* CORREÇÃO APLICADA: Impede o scroll horizontal no mobile */
+  html, body {
+    overflow-x: hidden;
+  }
+  
   .navbar {
     padding: 1rem 1.2rem;
   }
@@ -131,7 +153,7 @@ section {
   .nav-menu {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0; /* Começa alinhado à direita */
     width: 75%;
     height: 100vh;
     background: rgba(20, 20, 36, 0.98);
@@ -141,12 +163,15 @@ section {
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    transition: right 0.4s ease;
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+    
+    /* APRIMORAMENTO UI: Troca 'right' por 'transform' (mais performático) */
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
   }
 
   .nav-menu.active {
-    right: 0;
+    transform: translateX(0); /* Menu visível */
   }
 
   .nav-menu ul {
@@ -169,12 +194,20 @@ section {
 
 /* ===== Hero ===== */
 .hero {
-  height: 85vh;
+  /* ⬅️ Aprimoramento: 'min-height' é mais robusto que 'height' */
+  min-height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: radial-gradient(circle at 50% 20%, #1b1b2f 0%, var(--color-dark-bg) 80%);
+  
+  /* APRIMORAMENTO UI: Gradiente mais vibrante, alinhado à imagem */
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -20%, 
+    rgba(139, 92, 246, 0.3) 0%, /* Usa a cor primária com opacidade */
+    var(--color-dark-bg) 100%
+  );
+  
   padding: 2rem;
 }
 
@@ -183,7 +216,8 @@ section {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  /* ⬅️ Aprimoramento: Tipografia fluida com clamp() */
+  font-size: clamp(1.8rem, 1.2rem + 3vw, 3rem);
   font-weight: 600;
   margin-bottom: 1rem;
   letter-spacing: -0.5px;
@@ -203,10 +237,13 @@ section {
   color: white;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.3s ease;
+  /* ⬅️ Aprimoramento: Transições específicas */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-primary:hover {
+/* ⬅️ Aprimoramento: Adicionado :focus-visible para acessibilidade */
+.btn-primary:hover,
+.btn-primary:focus-visible {
   background-color: var(--color-primary-light);
   transform: translateY(-2px);
 }
@@ -242,7 +279,8 @@ section {
   border-radius: 12px;
   padding: 2rem;
   color: #d1d5db;
-  transition: all 0.3s ease;
+  /* ⬅️ Aprimoramento: Transições específicas */
+  transition: transform 0.3s ease, border-color 0.3s ease;
   border: 1px solid var(--color-dark-border);
 }
 
@@ -251,7 +289,9 @@ section {
   color: var(--color-text-light);
 }
 
-.card:hover {
+/* ⬅️ Aprimoramento: Adicionado :focus-visible para acessibilidade */
+.card:hover,
+.card:focus-visible {
   transform: translateY(-6px);
   border-color: var(--color-primary);
 }
@@ -281,11 +321,21 @@ input, textarea {
   border-radius: 8px;
   color: var(--color-text-light);
   font-family: inherit;
+  /* ⬅️ Aprimoramento: Transição para o foco */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 textarea {
   resize: none;
   height: 120px;
+}
+
+/* ⬅️ Aprimoramento: Estilo de foco para inputs */
+input:focus-visible, 
+textarea:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+  outline: none; /* Remove o outline padrão em favor do box-shadow */
 }
 
 .status {
@@ -298,7 +348,7 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; /* ⬅️ Alterado para min-height */
   background: var(--color-dark-bg);
   padding: 2rem;
 }
@@ -330,7 +380,8 @@ textarea {
   transition: color 0.3s ease;
 }
 
-.back-link:hover {
+.back-link:hover,
+.back-link:focus-visible { /* ⬅️ Adicionado :focus-visible */
   color: var(--color-primary-light);
 }
 
@@ -349,6 +400,45 @@ textarea {
   color: var(--color-primary-light);
 }
 
+/* ===== Scroll Top Button (NOVO) ===== */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--color-primary);
+  color: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  
+  /* Escondido por padrão */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.scroll-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover,
+.scroll-top-btn:focus-visible {
+  background-color: var(--color-primary-light);
+  transform: translateY(-2px); /* Pequeno 'hop' no hover */
+}
+
+.scroll-top-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
 /* ===== Footer ===== */
 footer {
   text-align: center;
@@ -359,17 +449,14 @@ footer {
   margin-top: 4rem;
 }
 
-/* ===== Microinteractions (Mantido) ===== */
-button, a, .card {
-  transition: all 0.3s ease;
-}
+/* ⬅️ Removida a regra de microinteração genérica 'button, a, .card' 
+   pois as transições foram movidas para os seletores específicos */
+
 
 /* ======= 🌐 RESPONSIVIDADE (Mantido) ======= */
 @media (max-width: 1024px) {
 
-  .hero h1 {
-    font-size: 2.5rem;
-  }
+  /* ⬅️ Removida regra do .hero h1 (agora é fluida) */
 
   .section {
     padding: 4rem 1.5rem;
@@ -377,15 +464,17 @@ button, a, .card {
 }
 
 @media (max-width: 768px) {
+  /* CORREÇÃO APLICADA: Impede o scroll horizontal no mobile */
+  html, body {
+    overflow-x: hidden;
+  }
 
   .hero {
     height: auto;
     padding: 4rem 1.5rem;
   }
 
-  .hero h1 {
-    font-size: 2.2rem;
-  }
+  /* ⬅️ Removida regra do .hero h1 (agora é fluida) */
 
   .hero p {
     font-size: 1rem;
@@ -411,9 +500,7 @@ button, a, .card {
     font-size: 1.2rem;
   }
 
-  .hero h1 {
-    font-size: 1.8rem;
-  }
+  /* ⬅️ Removida regra do .hero h1 (agora é fluida) */
 
   .hero p {
     font-size: 0.95rem;
@@ -433,5 +520,36 @@ button, a, .card {
 
   .login-container {
     padding: 2rem 1.5rem;
+  }
+}
+
+/* ===== APRIMORAMENTO UI/UX: Feedback de Carregamento no Botão ===== */
+.btn-primary.loading {
+  color: transparent; /* Esconde o texto original */
+  cursor: not-allowed;
+  position: relative;
+}
+
+.btn-primary.loading::after {
+  content: "";
+  display: block;
+  width: 1.2rem; /* Tamanho do spinner */
+  height: 1.2rem; /* Tamanho do spinner */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.6rem;
+  margin-left: -0.6rem;
+  
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff; /* Cor principal do spinner */
+  border-radius: 50%;
+  
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
