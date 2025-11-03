@@ -33,16 +33,22 @@ const db = getFirestore(app);
 const contactForm = document.getElementById("contactForm");
 if (contactForm) {
   const contactStatus = document.getElementById("contact-status");
-  const submitButton = contactForm.querySelector('button[type="submit"]'); // Pega o botão
+  const submitButton = contactForm.querySelector('button[type="submit"]'); 
+  const emailInput = contactForm["email"]; // --- ATUALIZAÇÃO (UX): Pega o input de email
 
   contactForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    
+    // --- ATUALIZAÇÃO (UX): Limpa o estado de erro anterior
+    emailInput.removeAttribute('aria-invalid');
+    // --- FIM ATUALIZAÇÃO ---
 
     // --- APRIMORAMENTO UX: VALIDAÇÃO ---
-    const email = contactForm["email"].value;
+    const email = emailInput.value;
     if (!isValidEmail(email)) {
         contactStatus.textContent = "Por favor, insira um formato de e-mail válido.";
         contactStatus.style.color = "red";
+        emailInput.setAttribute('aria-invalid', 'true'); // --- ATUALIZAÇÃO (UX/A11y)
         return; // Para a execução
     }
     // --- FIM APRIMORAMENTO ---
@@ -59,6 +65,14 @@ if (contactForm) {
         contactStatus.textContent = "Mensagem enviada com sucesso! 🚀";
         contactStatus.style.color = "green"; // Cor de sucesso
         contactForm.reset();
+        
+        // --- ATUALIZAÇÃO (UX): Limpa a mensagem de sucesso após 5 segundos
+        setTimeout(() => {
+            contactStatus.textContent = "";
+            contactStatus.style.color = "inherit"; 
+        }, 5000);
+        // --- FIM ATUALIZAÇÃO ---
+        
       })
       .catch(() => {
         contactStatus.textContent = "Erro ao enviar mensagem. Tente novamente.";
