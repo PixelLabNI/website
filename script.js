@@ -3,9 +3,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/fireba
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-// AVISO DE SEGURANÇA: As chaves do Firebase aqui são públicas. 
-// A REAL segurança deve ser garantida pelas **REGRAS DE SEGURANÇA DO FIRESTORE** no console do Firebase!
-
 // === EmailJS ===
 (function () {
   emailjs.init("z_mKZRnzlVblkfwLH");

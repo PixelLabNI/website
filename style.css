@@ -267,14 +267,16 @@ section {
   margin-bottom: 3rem;
 }
 
-/* ===== Cards ===== */
+/* ===== Cards (Ajustado para Links/Cards) ===== */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
 }
 
+/* NOVO: Estilo para links que agora são cards */
 .card {
+  display: block; /* Garante que o link ocupe todo o espaço do grid */
   background: var(--color-dark-card);
   border-radius: 12px;
   padding: 2rem;
@@ -282,6 +284,7 @@ section {
   /* ⬅️ Aprimoramento: Transições específicas */
   transition: transform 0.3s ease, border-color 0.3s ease;
   border: 1px solid var(--color-dark-border);
+  text-decoration: none; /* Remove o sublinhado padrão do link */
 }
 
 .card h3 {
@@ -448,10 +451,6 @@ footer {
   border-top: 1px solid var(--color-dark-border);
   margin-top: 4rem;
 }
-
-/* ⬅️ Removida a regra de microinteração genérica 'button, a, .card' 
-   pois as transições foram movidas para os seletores específicos */
-
 
 /* ======= 🌐 RESPONSIVIDADE (Mantido) ======= */
 @media (max-width: 1024px) {
